@@ -468,3 +468,90 @@ Further details, benchmarks, and a ready-to-flash firmware for STM32 boards (STM
 and Nucleo-L4R5ZI) are available in the [dedicated embedded repository](https://github.com/mqom/embedded-mqom).
 Additional experimental optimizations for embedded platforms are described in the paper
 [Breaking the Myth of MPCitH Inefficiency: Optimizing MQOM for Embedded Platforms](https://eprint.iacr.org/2026/078.pdf).
+
+## Benchmark Tables (`bench_table.py`)
+
+`bench_table.py` turns benchmark runs into the Markdown or LaTeX tables used in the
+specification. It can drive the whole chain itself - compile the binaries through `manage.py`,
+run the bench, format the result - or work from a JSON file produced earlier.
+
+```bash
+# All in one: compile, bench 100 repetitions, print Markdown
+python3 bench_table.py --compile --format md -n 100
+
+# Only category 1, compiling in parallel, as LaTeX
+python3 bench_table.py --compile -j -1 --format latex cat1
+
+# Binaries already in build/: bench and format only
+python3 bench_table.py --format md -n 100
+
+# From an existing run, no compilation and no bench
+python3 bench_table.py -i stats/bench.json --format latex
+```
+
+The positional argument selects what to measure: `all`, a category (`cat1`, `cat3`, `cat5`),
+or a single variant such as `cat1_gf16_fast_ct`. The JSON consumed by `-i` is what
+`manage.py bench -o FILE` writes, so a long campaign can be run once and reformatted freely.
+
+**Choosing the columns**
+
+* `--sizes` - add the pk, sk and signature size columns;
+* `--cycles` - real cycle counts through RDPMC, for KeyGen/Sign/Verify only;
+* `--detailed` - build with `BENCHMARK=1`, which adds the per-step breakdown of signing and
+  implies `--cycles`;
+* `--no-cycles` / `--no-ms` - drop one of the two units (`--no-ms` needs cycles to be on);
+* `--mem-usage` - build with `MEASURE_STACK=1` and add a stack/heap table. Only takes effect
+  together with `--compile`, since it changes how the binaries are built;
+* `--instances-parameters` - emit the MQ/proof parameter and key/signature size tables. These
+  come from the parameter headers, so this one needs neither binaries nor a bench run.
+
+**Two knobs that are easy to confuse**
+
+`-j` parallelises *compilation* and is safe to raise: it does not touch a measurement.
+`-p` parallelises the *benchmarks* themselves and defaults to sequential on purpose - concurrent
+runs contend for CPU and cache, which pollutes both the millisecond and the cycle figures. Leave
+`-p` at 0 for anything meant to be published.
+
+`--cycles` and `--detailed` read hardware performance counters; what that needs, and how to
+make the numbers reproducible, is the next subsection.
+
+### Stable cycle measurement
+
+On Linux the cycle source is `perf_event_open()` with `PERF_COUNT_HW_CPU_CYCLES`: real hardware
+PMU cycles, and architecture-independent. On x86-64 a direct userspace register read (RDPMC) is
+layered on top as a fast path, which avoids one syscall per sample. `benchmark/timing.c`
+therefore has three possible sources, in decreasing order of quality:
+
+* `RDPMC` - direct register read, x86-64 only, what published figures should use;
+* `READ` - the perf file descriptor works but RDPMC is unavailable: still real PMU cycles, one
+  syscall per sample;
+* `FALLBACK` - `perf_event_open()` itself failed, so an architecture-specific free-running
+  counter is used. This is *not* a PMU cycle count.
+
+`STRICT_CYCLES=1` is the default and makes `ticks_setup()` fail loudly rather than accept either
+downgrade, on the principle that a degraded measurement that looks like a real one is worse than
+an explicit failure. Set `STRICT_CYCLES=0` to accept the fallback with a warning instead. Access
+to the counters needs:
+
+```bash
+sudo sysctl -w kernel.perf_event_paranoid=2
+```
+
+**Turbo boost and frequency scaling.** Cycle counts are frequency-independent only to first
+order, so leaving the clock free to move does perturb them, not just the millisecond columns.
+The memory subsystem does not scale with the core clock: a cache miss or a DRAM access costs
+roughly a fixed amount of *time*, hence more core *cycles* when the core runs faster.
+Two runs at different boost states can therefore disagree by
+several percent on cycles alone, with nothing wrong in either.
+
+For figures meant to be compared or published, pin the clock before measuring.
+
+**Frequency extrapolation**
+
+`--current-freq` and `--target-freq` rescale the millisecond columns from the clock the run
+actually happened at to another one; cycle counts are left alone, being frequency-independent.
+This is an approximation valid between two clock speeds of the *same* microarchitecture, a base
+and a boost clock for instance - it says nothing about a different CPU, whose IPC differs.
+`--projected-cycles` goes the other way and *derives* a cycle column from the milliseconds,
+discarding any real counter data; it is meant for platforms with no usable cycle counter, macOS
+being the usual case.
