@@ -21,7 +21,11 @@ http://creativecommons.org/publicdomain/zero/1.0/
 #include "config.h"
 #ifdef XKCP_has_KeccakP1600times8
 
+#if !defined(SUPERCOP)
 #include "KeccakHash.h"
+#else
+#include <libkeccak.a.headers/KeccakHash.h>
+#endif
 #include "KeccakSpongetimes8.h"
 
 typedef struct {

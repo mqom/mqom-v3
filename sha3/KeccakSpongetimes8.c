@@ -14,7 +14,11 @@ http://creativecommons.org/publicdomain/zero/1.0/
 #include "KeccakSpongetimes8.h"
 
 #ifdef XKCP_has_KeccakP1600times8
+#if !defined(SUPERCOP)
 #include "KeccakP-1600-times8-SnP.h"
+#else
+#include <libkeccak.a.headers/KeccakP-1600-times8-SnP.h>
+#endif
 #endif
 
 #define prefix KeccakWidth1600times8

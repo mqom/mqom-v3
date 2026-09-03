@@ -34,7 +34,11 @@ extern void _XOF_Release_x4(Keccak_HashInstancetimes4 *ctx);
 #if !defined(MQOM3_FOR_MUPQ) && !defined(MQOM3_FOR_LIBOQS)
 #include <stdint.h>
 /* Include the underlying Keccak header for hash and XOF */
+#if !defined(SUPERCOP)
 #include "sha3/KeccakHash.h"
+#else
+#include <libkeccak.a.headers/KeccakHash.h>
+#endif
 #include "sha3/KeccakHashtimes4.h"
 
 /* For common helpers */

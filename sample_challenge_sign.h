@@ -163,6 +163,10 @@ static inline int SampleChallenge(const uint8_t sig_id[MQOM3_PARAM_DIGEST_SIZE],
     grinding_material_t mat = { 0 };
     int mat_precomputed = 0;
 
+#ifdef SUPERCOP
+    /* The whole grinding computation is public */
+    crypto_declassify(sig_id, MQOM3_PARAM_DIGEST_SIZE);
+#endif
     do {
         for (i = 0; i < 8; i++) {
             nonces[i][0] = (uint8_t)(nonce_int[i] & 0xffU);
@@ -171,9 +175,6 @@ static inline int SampleChallenge(const uint8_t sig_id[MQOM3_PARAM_DIGEST_SIZE],
             nonces[i][3] = (uint8_t)((nonce_int[i] >> 24) & 0xffU);
         }
         k = DeriveChallenge_x8(sig_id, (const uint8_t (*)[4])nonces, i_star, &mat, &mat_precomputed);
-#ifdef SUPERCOP
-        crypto_declassify(&k, sizeof(k));
-#endif
         /* Only -1 means "try the next batch"; -2 is a hard error and retrying
          * it would reproduce the same failure for the whole nonce space. */
         if (k == -1) {
@@ -301,6 +302,10 @@ static inline int SampleChallenge(const uint8_t sig_id[MQOM3_PARAM_DIGEST_SIZE],
     grinding_material_t mat = { 0 };
     int mat_precomputed = 0;
 
+#ifdef SUPERCOP
+    /* The whole grinding computation is public */
+    crypto_declassify(sig_id, MQOM3_PARAM_DIGEST_SIZE);
+#endif
     do {
         for (i = 0; i < 4; i++) {
             nonces[i][0] = (uint8_t)(nonce_int[i] & 0xffU);
@@ -309,9 +314,6 @@ static inline int SampleChallenge(const uint8_t sig_id[MQOM3_PARAM_DIGEST_SIZE],
             nonces[i][3] = (uint8_t)((nonce_int[i] >> 24) & 0xffU);
         }
         k = DeriveChallenge_x4(sig_id, (const uint8_t (*)[4])nonces, i_star, &mat, &mat_precomputed);
-#ifdef SUPERCOP
-        crypto_declassify(&k, sizeof(k));
-#endif
         /* Only -1 means "try the next batch"; -2 is a hard error and retrying
          * it would reproduce the same failure for the whole nonce space. */
         if (k == -1) {
@@ -423,6 +425,10 @@ static inline int SampleChallenge(const uint8_t sig_id[MQOM3_PARAM_DIGEST_SIZE],
     grinding_material_t mat = { 0 };
     int mat_precomputed = 0;
 
+#ifdef SUPERCOP
+    /* The whole grinding computation is public */
+    crypto_declassify(sig_id, MQOM3_PARAM_DIGEST_SIZE);
+#endif
     do {
         for (i = 0; i < 2; i++) {
             nonces[i][0] = (uint8_t)(nonce_int[i] & 0xffU);
@@ -431,9 +437,6 @@ static inline int SampleChallenge(const uint8_t sig_id[MQOM3_PARAM_DIGEST_SIZE],
             nonces[i][3] = (uint8_t)((nonce_int[i] >> 24) & 0xffU);
         }
         k = DeriveChallenge_x2(sig_id, (const uint8_t (*)[4])nonces, i_star, &mat, &mat_precomputed);
-#ifdef SUPERCOP
-        crypto_declassify(&k, sizeof(k));
-#endif
         /* Only -1 means "try the next batch"; -2 is a hard error and retrying
          * it would reproduce the same failure for the whole nonce space. */
         if (k == -1) {
@@ -463,15 +466,16 @@ static inline int SampleChallenge(const uint8_t sig_id[MQOM3_PARAM_DIGEST_SIZE],
     uint32_t nonce_int = 0;
     int v;
 
+#ifdef SUPERCOP
+    /* The whole grinding computation is public */
+    crypto_declassify(sig_id, MQOM3_PARAM_DIGEST_SIZE);
+#endif
     do {
         nonce[0] = (uint8_t)(nonce_int & 0xffU);
         nonce[1] = (uint8_t)((nonce_int >>  8) & 0xffU);
         nonce[2] = (uint8_t)((nonce_int >> 16) & 0xffU);
         nonce[3] = (uint8_t)((nonce_int >> 24) & 0xffU);
         v = DeriveChallenge(sig_id, nonce, i_star, &mat, &mat_precomputed);
-#ifdef SUPERCOP
-        crypto_declassify(&v, sizeof(v));
-#endif
         if (v == 0) { ret = 0; break; }
         /* v < -1: hard error from DeriveChallenge (grinding material), not a
          * rejected nonce - stop instead of grinding the whole nonce space. */

@@ -4,10 +4,6 @@
 #include "sample_challenge_common.h"
 #include "blc.h"
 
-#ifdef SUPERCOP
-#include "crypto_declassify.h"
-#endif
-
 /* Given precomputed material and a candidate nonce, check the AES grinding condition:
  *   Truncate_{W-1}(Enc(k0||01, g0||nonce) XOR Enc(k1||11, g1||nonce)) == 0
  * Used only by the scalar DeriveChallenge below: the batched DeriveChallenge_x2
