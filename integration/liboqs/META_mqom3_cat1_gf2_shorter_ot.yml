@@ -26,7 +26,7 @@ implementations:
     signature_keypair: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_default_crypto_sign_keypair
     signature_signature: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_default_crypto_sign_signature
     signature_verify: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_default_crypto_sign_verify
-    compile_opts: -DMQOM3_FOR_LIBOQS -DAPPLY_PUBLIC_API_NAMESPACE=oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_default_ -DAPPLY_NAMESPACE=oqs_sig_private_mqom3_cat1_gf2_shorter_ot_default_ -DMQOM3_PARAM_SECURITY=128 -DMQOM3_PARAM_BASE_FIELD=1 -DMQOM3_PARAM_TRADEOFF=2 -DMQOM3_PARAM_OT_VARIANT=1 -DNO_EMBEDDED_SRAM_SECTION -DBLC_SEEDEXPAND_CACHE -DUSE_PIOP_CACHE -DPIOP_BITSLICE -DUSE_XOF_X4 -DUSE_ENC_X8
+    compile_opts: -DMQOM3_FOR_LIBOQS -DAPPLY_PUBLIC_API_NAMESPACE=oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_default_ -DAPPLY_NAMESPACE=oqs_sig_private_mqom3_cat1_gf2_shorter_ot_default_ -DMQOM3_PARAM_SECURITY=128 -DMQOM3_PARAM_BASE_FIELD=1 -DMQOM3_PARAM_TRADEOFF=2 -DMQOM3_PARAM_OT_VARIANT=1 -DNO_EMBEDDED_SRAM_SECTION -DAES_GRINDING_X4 -DBLC_SEEDEXPAND_CACHE -DUSE_PIOP_CACHE -DPIOP_BITSLICE -DUSE_XOF_X4 -DUSE_ENC_X8 -DLARGE_TREE_BFS
     sources:  parameters/mqom3_parameters_cat1_gf2_shorter_ot.h
     common_dep: mqom_common
     no-secret-dependent-branching-claimed: true
@@ -40,7 +40,7 @@ implementations:
     signature_keypair: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_memopt_crypto_sign_keypair
     signature_signature: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_memopt_crypto_sign_signature
     signature_verify: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_memopt_crypto_sign_verify
-    compile_opts: -DMQOM3_FOR_LIBOQS -DAPPLY_PUBLIC_API_NAMESPACE=oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_memopt_ -DAPPLY_NAMESPACE=oqs_sig_private_mqom3_cat1_gf2_shorter_ot_memopt_ -DMQOM3_PARAM_SECURITY=128 -DMQOM3_PARAM_BASE_FIELD=1 -DMQOM3_PARAM_TRADEOFF=2 -DMQOM3_PARAM_OT_VARIANT=1 -DNO_EMBEDDED_SRAM_SECTION -DBLC_SEEDEXPAND_CACHE -DMEMORY_EFFICIENT_BLC -DPIOP_BITSLICE -DMEMORY_EFFICIENT_KEYGEN -DUSE_XOF_X4
+    compile_opts: -DMQOM3_FOR_LIBOQS -DAPPLY_PUBLIC_API_NAMESPACE=oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_memopt_ -DAPPLY_NAMESPACE=oqs_sig_private_mqom3_cat1_gf2_shorter_ot_memopt_ -DMQOM3_PARAM_SECURITY=128 -DMQOM3_PARAM_BASE_FIELD=1 -DMQOM3_PARAM_TRADEOFF=2 -DMQOM3_PARAM_OT_VARIANT=1 -DNO_EMBEDDED_SRAM_SECTION -DAES_GRINDING_X4 -DBLC_SEEDEXPAND_CACHE -DMEMORY_EFFICIENT_BLC -DPIOP_BITSLICE -DFIELDS_BITSLICE_COMPOSITE -DMEMORY_EFFICIENT_KEYGEN -DUSE_XOF_X4
     sources:  parameters/mqom3_parameters_cat1_gf2_shorter_ot.h
     common_dep: mqom_common
     no-secret-dependent-branching-claimed: true
@@ -54,7 +54,7 @@ implementations:
     signature_keypair: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_avx2_crypto_sign_keypair
     signature_signature: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_avx2_crypto_sign_signature
     signature_verify: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_avx2_crypto_sign_verify
-    compile_opts: -DMQOM3_FOR_LIBOQS -DAPPLY_PUBLIC_API_NAMESPACE=oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_avx2_ -DAPPLY_NAMESPACE=oqs_sig_private_mqom3_cat1_gf2_shorter_ot_avx2_ -DMQOM3_PARAM_SECURITY=128 -DMQOM3_PARAM_BASE_FIELD=1 -DMQOM3_PARAM_TRADEOFF=2 -DMQOM3_PARAM_OT_VARIANT=1 -DNO_EMBEDDED_SRAM_SECTION -DBLC_SEEDEXPAND_CACHE -DUSE_PIOP_CACHE -DUSE_XOF_X4 -DUSE_ENC_X8 -DFIELDS_AVX2
+    compile_opts: -DMQOM3_FOR_LIBOQS -DAPPLY_PUBLIC_API_NAMESPACE=oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_avx2_ -DAPPLY_NAMESPACE=oqs_sig_private_mqom3_cat1_gf2_shorter_ot_avx2_ -DMQOM3_PARAM_SECURITY=128 -DMQOM3_PARAM_BASE_FIELD=1 -DMQOM3_PARAM_TRADEOFF=2 -DMQOM3_PARAM_OT_VARIANT=1 -DNO_EMBEDDED_SRAM_SECTION -DAES_GRINDING_X4 -DBLC_SEEDEXPAND_CACHE -DUSE_PIOP_CACHE -DUSE_XOF_X4 -DUSE_ENC_X8 -DFIELDS_AVX2 -DLARGE_TREE_BFS
     sources:  parameters/mqom3_parameters_cat1_gf2_shorter_ot.h
     common_dep: mqom_common
     no-secret-dependent-branching-claimed: true
@@ -75,7 +75,7 @@ implementations:
     signature_keypair: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_neon_crypto_sign_keypair
     signature_signature: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_neon_crypto_sign_signature
     signature_verify: oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_neon_crypto_sign_verify
-    compile_opts: -DMQOM3_FOR_LIBOQS -DAPPLY_PUBLIC_API_NAMESPACE=oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_neon_ -DAPPLY_NAMESPACE=oqs_sig_private_mqom3_cat1_gf2_shorter_ot_neon_ -DMQOM3_PARAM_SECURITY=128 -DMQOM3_PARAM_BASE_FIELD=1 -DMQOM3_PARAM_TRADEOFF=2 -DMQOM3_PARAM_OT_VARIANT=1 -DNO_EMBEDDED_SRAM_SECTION -DBLC_SEEDEXPAND_CACHE -DUSE_PIOP_CACHE -DUSE_XOF_X4 -DUSE_ENC_X8 -DFIELDS_NEON
+    compile_opts: -DMQOM3_FOR_LIBOQS -DAPPLY_PUBLIC_API_NAMESPACE=oqs_sig_pubapi_mqom3_cat1_gf2_shorter_ot_neon_ -DAPPLY_NAMESPACE=oqs_sig_private_mqom3_cat1_gf2_shorter_ot_neon_ -DMQOM3_PARAM_SECURITY=128 -DMQOM3_PARAM_BASE_FIELD=1 -DMQOM3_PARAM_TRADEOFF=2 -DMQOM3_PARAM_OT_VARIANT=1 -DNO_EMBEDDED_SRAM_SECTION -DAES_GRINDING_X4 -DBLC_SEEDEXPAND_CACHE -DUSE_PIOP_CACHE -DUSE_XOF_X4 -DUSE_ENC_X8 -DFIELDS_NEON -DLARGE_TREE_BFS
     sources:  parameters/mqom3_parameters_cat1_gf2_shorter_ot.h
     common_dep: mqom_common
     no-secret-dependent-branching-claimed: true

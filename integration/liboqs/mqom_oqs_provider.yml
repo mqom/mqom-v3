@@ -1,8 +1,8 @@
   -
     family: 'MQOM'
-    # NOTE: for MQOM, all the signature variants present in liboqs are compatible with RFC 8446, and could beExpand commentComment on line R1368Resolved
+    # NOTE: for MQOM, all the signature variants present in liboqs are compatible with RFC 8446, and could be
     # enabled with "enable: true" and "enable_tls: true". We however limit the fully enabled variants to the MQOM
-    # "Fast R5" ones in order to leave room for other signatures: if one wants to test the disabled MQOM variants,
+    # "Fast CT" ones in order to leave room for other signatures: if one wants to test the disabled MQOM variants,
     # one can explicitly enable them below. For the disabled variants, we use "enable: false" and "enable_tls: true" since
     # they are disabled by default but are still compatible with TLS: switch to "enable: true" to activate them for your
     # local compilation.
