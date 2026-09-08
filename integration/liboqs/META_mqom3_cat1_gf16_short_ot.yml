@@ -75,7 +75,7 @@ implementations:
     signature_keypair: oqs_sig_pubapi_mqom3_cat1_gf16_short_ot_neon_crypto_sign_keypair
     signature_signature: oqs_sig_pubapi_mqom3_cat1_gf16_short_ot_neon_crypto_sign_signature
     signature_verify: oqs_sig_pubapi_mqom3_cat1_gf16_short_ot_neon_crypto_sign_verify
-    compile_opts: -DMQOM3_FOR_LIBOQS -DAPPLY_PUBLIC_API_NAMESPACE=oqs_sig_pubapi_mqom3_cat1_gf16_short_ot_neon_ -DAPPLY_NAMESPACE=oqs_sig_private_mqom3_cat1_gf16_short_ot_neon_ -DMQOM3_PARAM_SECURITY=128 -DMQOM3_PARAM_BASE_FIELD=4 -DMQOM3_PARAM_TRADEOFF=1 -DMQOM3_PARAM_OT_VARIANT=1 -DNO_EMBEDDED_SRAM_SECTION -DAES_GRINDING_X4 -DBLC_SEEDEXPAND_CACHE -DUSE_PIOP_CACHE -DUSE_XOF_X4 -DUSE_ENC_X8 -DFIELDS_NEON -DLARGE_TREE_BFS
+    compile_opts: -DMQOM3_FOR_LIBOQS -DAPPLY_PUBLIC_API_NAMESPACE=oqs_sig_pubapi_mqom3_cat1_gf16_short_ot_neon_ -DAPPLY_NAMESPACE=oqs_sig_private_mqom3_cat1_gf16_short_ot_neon_ -DMQOM3_PARAM_SECURITY=128 -DMQOM3_PARAM_BASE_FIELD=4 -DMQOM3_PARAM_TRADEOFF=1 -DMQOM3_PARAM_OT_VARIANT=1 -DNO_EMBEDDED_SRAM_SECTION -DAES_GRINDING_X4 -DBLC_SEEDEXPAND_CACHE -DUSE_PIOP_CACHE -DUSE_XOF_X4 -DUSE_ENC_X8 -DFIELDS_NEON -DRIJNDAEL_ARM_AES -DLARGE_TREE_BFS
     sources:  parameters/mqom3_parameters_cat1_gf16_short_ot.h
     common_dep: mqom_common
     no-secret-dependent-branching-claimed: true
@@ -89,3 +89,4 @@ implementations:
       - Darwin
       required_flags:
       - asimd
+      - sha3

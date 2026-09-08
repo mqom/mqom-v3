@@ -66,6 +66,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     - AES: liboqs
@@ -124,6 +125,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     - AES: liboqs
@@ -182,6 +184,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     - AES: liboqs
@@ -240,6 +243,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     - AES: liboqs
@@ -298,6 +302,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     - AES: liboqs
@@ -356,6 +361,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     - AES: liboqs
@@ -411,6 +417,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -465,6 +472,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -519,6 +527,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -573,6 +582,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -627,6 +637,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -681,6 +692,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -735,6 +747,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -789,6 +802,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -843,6 +857,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -897,6 +912,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -951,6 +967,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
@@ -1005,6 +1022,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - sha3
     common-crypto:
     - SHA3: liboqs
     no-secret-dependent-branching-claimed: true
