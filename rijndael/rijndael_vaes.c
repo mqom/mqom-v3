@@ -1,5 +1,5 @@
 #include "rijndael_platform.h"
-#ifdef RIJNDAEL_VAES
+#if defined(RIJNDAEL_VAES)
 
 #include "rijndael_vaes.h"
 
@@ -1906,4 +1906,10 @@ err:
 	return ret;
 }
 
+
+#else /* !RIJNDAEL_VAES */
+/*
+ * Dummy definition to avoid the empty translation unit ISO C warning
+ */
+typedef int dummy;
 #endif /* RIJNDAEL_VAES */

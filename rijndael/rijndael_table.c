@@ -929,9 +929,9 @@ MAKE_GENERIC_FUNCS_ECB_IMPL(rijndael256, table, 32, 32)
 #pragma GCC diagnostic pop
 #endif
 
-#else /* */
+#else /* RIJNDAEL_AES_NI && !RIJNDAEL_TABLE */
 /*
  * Dummy definition to avoid the empty translation unit ISO C warning
  */
 typedef int dummy;
-#endif
+#endif /* !RIJNDAEL_AES_NI || RIJNDAEL_TABLE */

@@ -1646,4 +1646,10 @@ WEAK int rijndael256_arm_aes_enc_ecb(const rijndael_arm_aes_ctx_rijndael256_ecb 
     return 0;
 }
 
+
+#else /* !RIJNDAEL_ARM_AES */
+/*
+ * Dummy definition to avoid the empty translation unit ISO C warning
+ */
+typedef int dummy;
 #endif /* RIJNDAEL_ARM_AES */

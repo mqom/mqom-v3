@@ -505,9 +505,9 @@ MAKE_GENERIC_FUNCS_ECB_IMPL(aes128, ref, 16, 16)
 MAKE_GENERIC_FUNCS_ECB_IMPL(aes256, ref, 32, 16)
 MAKE_GENERIC_FUNCS_ECB_IMPL(rijndael256, ref, 32, 32)
 
-#else /* !RIJNDAEL_CONSTANT_TIME_REF, */
+#else /* !RIJNDAEL_CONSTANT_TIME_REF */
 /*
  * Dummy definition to avoid the empty translation unit ISO C warning
  */
 typedef int dummy;
-#endif
+#endif /* RIJNDAEL_CONSTANT_TIME_REF */

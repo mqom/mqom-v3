@@ -1529,4 +1529,4 @@ WEAK int rijndael256_aes_ni_enc_ecb(const rijndael_aes_ni_ctx_rijndael256_ecb *c
  * Dummy definition to avoid the empty translation unit ISO C warning
  */
 typedef int dummy;
-#endif
+#endif /* RIJNDAEL_AES_NI */

@@ -278,9 +278,9 @@ MAKE_GENERIC_FUNCS_ECB_IMPL(aes128, external, 16, 16)
 MAKE_GENERIC_FUNCS_ECB_IMPL(aes256, external, 32, 16)
 MAKE_GENERIC_FUNCS_ECB_IMPL(rijndael256, external, 32, 32)
 
-#else /* */
+#else /* !RIJNDAEL_EXTERNAL */
 /*
  * Dummy definition to avoid the empty translation unit ISO C warning
  */
 typedef int dummy;
-#endif
+#endif /* RIJNDAEL_EXTERNAL */

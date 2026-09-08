@@ -1077,7 +1077,7 @@ WEAK int rijndael256_ct64_enc_ecb(const rijndael_ct64_ctx_rijndael256_ecb *ctx, 
 }
 
 
-#else /* */
+#else /* !RIJNDAEL_BITSLICE */
 /*
  * Dummy definition to avoid the empty translation unit ISO C warning
  */
