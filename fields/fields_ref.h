@@ -538,7 +538,6 @@ static inline void gf256_vect_mult_multiple_public_ref(uint8_t* const* c, const 
 		*c[e] = 0;
 	}
 
-	i = 0;
 #if defined(GF256_MULT_X4)
 	{
 		/* Same tiling as gf256_mat_mult_ref(): the xtime ladder of a tile of
@@ -576,6 +575,8 @@ static inline void gf256_vect_mult_multiple_public_ref(uint8_t* const* c, const 
 		}
 		i = full;
 	}
+#else
+	i = 0;
 #endif
 	while (i < len) {
 		for (e = 0; e < n; e++) {
@@ -660,7 +661,6 @@ static inline void gf256_mat_mult_ref(const uint8_t *A, const uint8_t *X, uint8_
 					acc ^= gf256_mult4_tiled_ladder_ref(a_, &pows[0][bb], GF256_MAT_MULT_NB_BLOCKS);
 				}
 			}
-			c = blk_hi;
 			for (c = blk_hi; c < hi; c++) {
 				Y[i] ^= gf256_mult_ref(A[(n * i) + c], X[c]);
 			}
@@ -1044,7 +1044,6 @@ static inline uint16_t gf256to2_vect_mult_ref(const uint16_t *a, const uint16_t 
 	uint32_t i;
 	uint16_t res;
 
-	res = 0;
 	i = 0;
 #if defined(GF256_MULT_X4)
 	{
@@ -1066,6 +1065,8 @@ static inline uint16_t gf256to2_vect_mult_ref(const uint16_t *a, const uint16_t 
 		}
 		res = gf256to2_recombine_x4(acc00, acc11, accss);
 	}
+#else
+	res = 0;
 #endif
 	while (i < len) {
 		res ^= gf256to2_mult_ref(a[i], b[i]);
@@ -1089,7 +1090,6 @@ static inline void gf256to2_vect_mult_multiple_public_ref(uint16_t* const* c, co
 		*c[e] = 0;
 	}
 
-	i = 0;
 #if defined(GF256_MULT_X4)
 	{
 		/* Same tiling as gf256to2_mat_mult_ref(): the three xtime ladders of a
@@ -1137,6 +1137,8 @@ static inline void gf256to2_vect_mult_multiple_public_ref(uint16_t* const* c, co
 		}
 		i = full;
 	}
+#else
+	i = 0;
 #endif
 	while (i < len) {
 		for (e = 0; e < n; e++) {

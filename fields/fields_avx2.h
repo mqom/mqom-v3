@@ -642,7 +642,7 @@ static inline void gf256_gf2_constant_vect_mult_avx2(uint8_t a_gf256, const uint
 		} else {
 			ceil_len = 4;
 			/* Obvious 256-bit */
-			_b = load_incomplete_m256(&b_gf2[i / 8], 4);
+			_b = load_incomplete_m256(&b_gf2[i / 8], ceil_len);
 		}
 		/* Create a selection mask from the bits in _a */
 		const __m256i shuff_msk = _mm256_set_epi8(3, 3, 3,  3,  3, 3, 3, 3, 2, 2, 2,  2,  2, 2, 2, 2,
@@ -1280,7 +1280,7 @@ static inline void gf256to2_gf2_constant_vect_mult_avx2(uint16_t a_gf256to2, con
 		} else {
 			/* Obvious 256-bit */
 			ceil_len = 2;
-			_b = load_incomplete_m256(&b_gf2[i / 16], 2);
+			_b = load_incomplete_m256(&b_gf2[i / 16], ceil_len);
 		}
 		/* Create a selection mask from the bits in _a */
 		const __m256i shuff_msk = _mm256_set_epi8(1, 1, 1,  1,  1, 1, 1, 1, 1, 1, 1,  1,  1, 1, 1, 1,

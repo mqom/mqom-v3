@@ -143,6 +143,9 @@ int Sign_Prepare(const uint8_t sk[MQOM3_SK_SIZE], const uint8_t salt[MQOM3_PARAM
 	pos += MQOM3_PARAM_TAU * BYTE_SIZE_FIELD_BASE(MQOM3_PARAM_ETA * MQOM3_PARAM_MU);
 	uint8_t *serialized_ckey = &presig[pos];
 	pos += (uint32_t)(MQOM3_CKEY_SIZE);
+	/* The last step is never read back: it completes the layout above so a
+	 * field added later does not start from a stale offset. */
+	(void)pos;
 
 	memcpy(out_salt, salt, MQOM3_PARAM_SALT_SIZE);
 
@@ -283,6 +286,9 @@ int Sign_Finalize(const uint8_t sk[MQOM3_SK_SIZE], const uint8_t *msg, unsigned 
 	pos += MQOM3_PARAM_TAU * BYTE_SIZE_FIELD_BASE(MQOM3_PARAM_ETA * MQOM3_PARAM_MU);
 	parse_ckey(&data[pos], sk, salt, key);
 	pos += (uint32_t)(MQOM3_CKEY_SIZE);
+	/* Same as in Sign_Prepare(): the last step completes the layout and is
+	 * deliberately not read back. */
+	(void)pos;
 
 	/* Prepare the signature: sig_id[D] | salt | nonce[4] | opening (v3) */
 	pos = 0;
