@@ -95,10 +95,10 @@ static inline int BLC_ConvertToLine(
 	/* aligned(64): GCC infers 64-byte alignment for these from the preceding
 	 * exp[] array, but ASan's fake stack breaks it on AVX-512 loads, causing a #GP fault.
 	 * Explicit aligned(64) forces both the real stack and ASan to honour it. */
-	field_base_elt bar_x[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)] ALIGN(64);
-	field_ext_elt bar_u[FIELD_EXT_PACKING(MQOM3_PARAM_ETA)] ALIGN(64);
-	field_ext_elt tmp_n[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)] ALIGN(64);
-	field_ext_elt tmp_eta[FIELD_EXT_PACKING(MQOM3_PARAM_ETA)] ALIGN(64);
+	ALIGN(64) field_base_elt bar_x[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)];
+	ALIGN(64) field_ext_elt bar_u[FIELD_EXT_PACKING(MQOM3_PARAM_ETA)];
+	ALIGN(64) field_ext_elt tmp_n[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)];
+	ALIGN(64) field_ext_elt tmp_eta[FIELD_EXT_PACKING(MQOM3_PARAM_ETA)];
 	field_base_elt acc_x[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)];
 	uint8_t data_folding[MQOM3_PARAM_NB_EVALS_LOG][BYTE_SIZE_FIELD_BASE(MQOM3_PARAM_MQ_N) + BYTE_SIZE_FIELD_EXT(MQOM3_PARAM_ETA)];
 	uint8_t acc[BYTE_SIZE_FIELD_BASE(MQOM3_PARAM_MQ_N) + BYTE_SIZE_FIELD_EXT(MQOM3_PARAM_ETA)];
@@ -250,12 +250,12 @@ static inline int BLC_ConvertToLineEval(
 	/* One group of 8 expanded leaves only (see the header comment above) */
 	uint8_t exp[8][BLC_CONVERT_EXP_ROW_BYTES];
 	/* See aligned(64) rationale in BLC_ConvertToLine above. */
-	field_base_elt bar_x[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)] ALIGN(64);
-	field_ext_elt bar_u[FIELD_EXT_PACKING(MQOM3_PARAM_ETA)] ALIGN(64);
+	ALIGN(64) field_base_elt bar_x[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)];
+	ALIGN(64) field_ext_elt bar_u[FIELD_EXT_PACKING(MQOM3_PARAM_ETA)];
 	//field_base_elt bar_x_i[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)] = {0};
 	//field_ext_elt bar_u_i[FIELD_EXT_PACKING(MQOM3_PARAM_ETA)] = {0};
-	field_ext_elt tmp_n[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)] ALIGN(64);
-	field_ext_elt tmp_eta[FIELD_EXT_PACKING(MQOM3_PARAM_ETA)] ALIGN(64);
+	ALIGN(64) field_ext_elt tmp_n[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)];
+	ALIGN(64) field_ext_elt tmp_eta[FIELD_EXT_PACKING(MQOM3_PARAM_ETA)];
 	field_base_elt acc_x[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)];
 	uint8_t data_folding[MQOM3_PARAM_NB_EVALS_LOG][BYTE_SIZE_FIELD_BASE(MQOM3_PARAM_MQ_N) + BYTE_SIZE_FIELD_EXT(MQOM3_PARAM_ETA)];
 	uint8_t acc[BYTE_SIZE_FIELD_BASE(MQOM3_PARAM_MQ_N) + BYTE_SIZE_FIELD_EXT(MQOM3_PARAM_ETA)];

@@ -24,8 +24,8 @@ typedef field_ext_elt (*VectorSetMQ)[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)];
 
 int KeyGen(const uint8_t seed_x[BYTE_SIZE_FIELD_BASE(MQOM3_PARAM_MQ_N)], const uint8_t mseed_eq[2 * MQOM3_PARAM_SEED_SIZE], uint8_t sk[MQOM3_SK_SIZE], uint8_t pk[MQOM3_PK_SIZE]) {
 	int ret = -1;
-	field_base_elt x[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)] KEYGEN_BUF_ALIGN;
-	field_ext_elt y[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_M / MQOM3_PARAM_MU)] KEYGEN_BUF_ALIGN;
+	KEYGEN_BUF_ALIGN field_base_elt x[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)];
+	KEYGEN_BUF_ALIGN field_ext_elt y[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_M / MQOM3_PARAM_MU)];
 	uint32_t i;
 	field_ext_elt *_A_hat = NULL;
 	field_ext_elt *_b_hat = NULL;
@@ -56,7 +56,7 @@ int KeyGen(const uint8_t seed_x[BYTE_SIZE_FIELD_BASE(MQOM3_PARAM_MQ_N)], const u
 	ERR(ret, err);
 
 	/* Perform the MQ equations computation in y. */
-	field_ext_elt vect_tmp[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)] KEYGEN_BUF_ALIGN;
+	KEYGEN_BUF_ALIGN field_ext_elt vect_tmp[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)];
 	for (i = 0; i < MQOM3_PARAM_MQ_M / MQOM3_PARAM_MU; i++) {
 		field_ext_elt y_i;
 		field_ext_base_mat_mult((field_ext_elt*)A_hat[i], x, vect_tmp, MQOM3_PARAM_MQ_N, TRI_INF);
@@ -90,11 +90,11 @@ err:
 /* Memory optimized KeyGen: MQ matrices expansion is streamed */
 int KeyGen(const uint8_t seed_x[BYTE_SIZE_FIELD_BASE(MQOM3_PARAM_MQ_N)], const uint8_t mseed_eq[2 * MQOM3_PARAM_SEED_SIZE], uint8_t sk[MQOM3_SK_SIZE], uint8_t pk[MQOM3_PK_SIZE]) {
 	int ret = -1;
-	field_base_elt x[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)] KEYGEN_BUF_ALIGN;
-	field_ext_elt y[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_M / MQOM3_PARAM_MU)] KEYGEN_BUF_ALIGN;
+	KEYGEN_BUF_ALIGN field_base_elt x[FIELD_BASE_PACKING(MQOM3_PARAM_MQ_N)];
+	KEYGEN_BUF_ALIGN field_ext_elt y[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_M / MQOM3_PARAM_MU)];
 	uint32_t i, j;
 	/* Only use rows for A_hat and b_hat to save memory */
-	field_ext_elt A_hat_row[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)] KEYGEN_BUF_ALIGN;
+	KEYGEN_BUF_ALIGN field_ext_elt A_hat_row[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)];
 	/* NOTE: we reuse the A_hat_row memory slot to save memory */
 	field_ext_elt *b_hat_row = A_hat_row;
 	/* Streaming expand equation context */
@@ -112,7 +112,7 @@ int KeyGen(const uint8_t seed_x[BYTE_SIZE_FIELD_BASE(MQOM3_PARAM_MQ_N)], const u
 	/* Compute the equations expansion in a streaming way to save memory */
 	ret = ExpandEquations_memopt_init(mseed_eq, &EEctx);
 	ERR(ret, err);
-	field_ext_elt tmp[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)] KEYGEN_BUF_ALIGN;
+	KEYGEN_BUF_ALIGN field_ext_elt tmp[FIELD_EXT_PACKING(MQOM3_PARAM_MQ_N)];
 	for (i = 0; i < MQOM3_PARAM_MQ_M / MQOM3_PARAM_MU; i++) {
 		field_ext_elt y_i;
 		/* Perform operations row by row for A_hat */
