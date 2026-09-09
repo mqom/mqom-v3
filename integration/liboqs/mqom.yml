@@ -417,6 +417,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -472,6 +473,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -527,6 +529,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -582,6 +585,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -637,6 +641,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -692,6 +697,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -747,6 +753,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -802,6 +809,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -857,6 +865,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -912,6 +921,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -967,6 +977,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
@@ -1022,6 +1033,7 @@ parameter-sets:
       - Darwin
       required_flags:
       - asimd
+      - aes
       - sha3
     common-crypto:
     - SHA3: liboqs
